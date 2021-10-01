@@ -32,13 +32,13 @@ function processPhrase (){
     phrase = document.getElementById("phrase").value
     
     out = document.getElementById("result")
-    if(sphrase == phrase){
+    if(secretphrase == phrase){
         correct = correct +1
-        alert("Access is allowed")
+        alert("Access allowed")
         out.innerHTML = "Correct:" +correct
     } else {
         wrong = wrong +1
-        alert("Access is denied")
+        alert("Access denied")
         out.innerHTML = "Wrong:" +wrong
     }
 }
