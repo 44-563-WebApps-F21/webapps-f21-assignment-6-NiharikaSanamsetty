@@ -10,70 +10,80 @@
 <h2>Niharika Sanamsetty computes </h2>
 
 <form>
-    <label for="form1_base">Enter a base</label>
-    <input type ="number" id="form1_base" name="form1_base" min=10 max=50 step=2 value=30> <br>
+    <label for="base">Enter a base</label>
+    <input type ="number" id="base" value=10> <br><br>
 
-    <label for="form1_exponent">Enter an exponent</label>
-    <input type ="number" id="form1_exponent" name="form1_exponent" min=2 autofocus> <br>
+    <label for="expo">Enter an exponent </label>
+    <input type ="number" id="expo"  autofocus> <br><br>
 
-    <input type="button" onclick="powers()" value="Compute">
+    <input type="button" onclick="powers()" value="compute"><br><br>
 </form>
 
-
-<p id="result">This displays results </p>
 <form>
-    <input type="radio" id="rg1_plus" name="operation"onclick="processRadio()" value="plus">
-    <label for="rg1_plus">+</label></br>
+    <input type="radio" id="radio_1" name="arithmetic" value="plus" onclick="processRadio()">  
+       
+    <label for="radio_1">+</label></br>
+  
+    <input type="radio" id="radio_2" name="arithmetic" value="minus" onclick="processRadio()">
 
-    <input type="radio" id="rg1_minus" name="operation" onclick="processRadio()" value="minus">
-    <label for="rg1_minus">-</label></br>
+    <label for="radio">-</label></br>
+  
+    <input type="radio" id="radio_3" name="arithmetic"  value="times" onclick="processRadio()">
+    <label for="radio_3">*</label></br>
 
-    <input type="radio" id="rg1_times" name="operation" onclick="processRadio()" value="times">
-    <label for="rg1_times">*</label></br>
+    <input type="radio" id="radio_4" name="arithmetic" value="divide" onclick="processRadio()">
+    <label for="radio_4">/</label>
 
-    <input type="radio" id="rg1_divide" name="operation" onclick="processRadio()" value="divide">
-    <label for="rg1_divide">/</label></br>
+  </form>
+<div id="radio_result"></div>
 
-</form>
-
+<div id="result"></div>
 
 <script> 
-var result=" ";
+
 function powers(){
+   
+    let result= " "
     console.log("Getting form values")
-    base = document.getElementById("form1_base").value
-    exponent = document.getElementById("form1_exponent").value
-    confirmed = confirm("Are these the values? "+ base +" and "+ exponent )
-    for(let i=0;i<exponent;i++)
-    {
-        result=result+Math.pow(base,i)+" ";
+     baseValue = document.getElementById("base").value
+     expoValue = document.getElementById("expo").value
+     resultDiv = document.getElementById("result")
+   
+    for(i=1;i<=expoValue;i++){
+        result =result+ Math.pow(baseValue,i)+ " "
+        resultDiv.innerHTML="powers of base are: "+ result
+            
     }
-    console.log(result);
-    out = document.getElementById("result")
-    out.innerHTML = "Powers of the base are:"+ result;
-    
 }
-function processRadio() {
-            let first = document.getElementById("form1_base").value;
-            let second = document.getElementById("form1_exponenet").value;
-            plus = document.getElementById("rg1_plus").checked
-            minus = document.getElementById("rg1_minus").checked
-            times = document.getElementById("rg1_times").checked
-            divide = document.getElementById("rg1_divide").checked
-           
-            if (plus) {
-                document.getElementById("arithmetic").innerHTML = (Number)(first) + (Number)(second)
+
+ function processRadio(){
+    base_value = document.getElementById("base").value
+    expo_value = document.getElementById("expo").value
+    arithmetic_value =document.getElementsByName("arithmetic")
+    result_value=document.getElementById("radio_result")
+  
+    for(i = 0; i < arithmetic_value.length; i++) {
+        if(arithmetic_value[i].checked){
+            console.log(arithmetic_value[i].value)
+            if(arithmetic_value[i].value=="plus"){
+                let add = parseFloat(base_value)+parseFloat(expo_value)
+                result_value.innerHTML = "Result for " + base_value + " + " + expo_value + " is " + add
             }
-            if (minus) {
-                document.getElementById("arithmetic").innerHTML = first - second
+            else if(arithmetic_value[i].value=="minus"){
+                let sub = base_value-expo_value
+                result_value.innerHTML = "Result for " + base_value + " - " + expo_value + " is " + sub
             }
-            if (times) {
-                document.getElementById("arithmetic").innerHTML = first * second
+            else if(arithmetic_value[i].value=="times"){
+                let mul = base_value*expo_value
+                result_value.innerHTML = "Result for " + base_value + " * " + expo_value + " is " + mul
             }
-            if (divide) {
-                document.getElementById("arithmetic").innerHTML = first / second
+            else if(arithmetic_value[i].value=="divide"){
+                let div = base_value/expo_value
+                result_value.innerHTML = "Result for " + base_value + " / " + expo_value + " is " + div
             }
         }
+ }
+}
 </script>
 
 </body>
